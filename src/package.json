@@ -36,7 +36,11 @@
     "shell-env": "3.0.0",
     "signale": "1.4.0",
     "smoothie": "1.35.0",
+<<<<<<< HEAD
     "systeminformation": "4.32.0",
+=======
+    "systeminformation": "4.30.4",
+>>>>>>> parent of e8a36aa... chore: upgrade systeminf to v4.30.5, patch sec issue #907
     "tail": "2.0.4",
     "username": "5.1.0",
     "which": "2.0.2",
