@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/GitSquared/edex-ui#readme",
   "dependencies": {
+<<<<<<< HEAD
     "augmented-ui": "^1.1.2",
     "color": "3.1.3",
     "geolite2-redist": "^2.0.1",
@@ -49,6 +50,21 @@
     "xterm-addon-attach": "0.6.0",
     "xterm-addon-fit": "0.4.0",
     "xterm-addon-ligatures": "0.3.0"
+=======
+    "color": "3.1.1",
+    "howler": "2.1.2",
+    "nanoid": "2.0.1",
+    "node-pty": "0.8.1",
+    "pretty-bytes": "5.2.0",
+    "shell-env": "3.0.0",
+    "signale": "1.4.0",
+    "smoothie": "1.35.0",
+    "systeminformation": "4.4.1",
+    "tail": "2.0.2",
+    "ws": "7.0.0",
+    "xterm": "3.13.0",
+    "username": "5.0.0"
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
   },
   "optionalDependencies": {
     "osx-temperature-sensor": "1.0.7"
