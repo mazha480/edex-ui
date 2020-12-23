@@ -82,6 +82,7 @@ class LocationGlobe {
             // Connections
             this.conns = [];
             this.addConn = ip => {
+<<<<<<< HEAD
                 let data = window.mods.netstat.geoLookup.get(ip);
                 let geo = (data !== null ? data.location : {});
                 if (geo.latitude && geo.longitude) {
@@ -90,6 +91,19 @@ class LocationGlobe {
                     window.mods.globe.conns.push({
                         ip,
                         pin: window.mods.globe.globe.addPin(lat, lon, "", 1.2),
+=======
+                require("https").get({host: "ipinfo.now.sh", port: 443, path: "/"+ip, localAddress: window.mods.netstat.internalIPv4, agent: false}, res => {
+                    let rawData = "";
+                    res.on("data", chunk => {
+                        rawData += chunk;
+                    });
+                    res.on("end", () => {
+                        this.parseResponse(rawData, ip).catch(e => {
+                            let electron = require("electron");
+                            electron.ipcRenderer.send("log", "note", "LocationGlobe: Error parsing data from ipinfo.now.sh");
+                            electron.ipcRenderer.send("log", "debug", `Error: ${e}`);
+                        })
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
                     });
                 }
             };
@@ -128,6 +142,22 @@ class LocationGlobe {
         }, 4000);
     }
 
+<<<<<<< HEAD
+=======
+    async parseResponse(rawData, ip) {
+        const json = JSON.parse(rawData);
+        if (json.geo) {
+            const lat = Number(json.geo.latitude);
+            const lon = Number(json.geo.longitude);
+
+            window.mods.globe.conns.push({
+                ip,
+                pin: window.mods.globe.globe.addPin(lat, lon, "", 1.2),
+            });
+        }
+    }
+
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
     addRandomConnectedMarkers() {
         const randomLat = this.getRandomInRange(40, 90, 3);
         const randomLong = this.getRandomInRange(-180, 0, 3);
@@ -135,11 +165,29 @@ class LocationGlobe {
         this.globe.addMarker(randomLat - 20, randomLong + 150, '', true);
     }
     addTemporaryConnectedMarker(ip) {
+<<<<<<< HEAD
         let data = window.mods.netstat.geoLookup.get(ip);
         let geo = (data !== null ? data.location : {});
         if (geo.latitude && geo.longitude) {
             const lat = Number(geo.latitude);
             const lon = Number(geo.longitude);
+=======
+        require("https").get({host: "ipinfo.now.sh", port: 443, path: "/"+ip, localAddress: window.mods.netstat.internalIPv4, agent: false}, res => {
+            let rawData = "";
+            res.on("data", chunk => {
+                rawData += chunk;
+            });
+            res.on("end", () => {
+                let json;
+                try {
+                    json = JSON.parse(rawData);
+                } catch(e) {
+                    return;
+                }
+                if (json.geo) {
+                    const lat = Number(json.geo.latitude);
+                    const lon = Number(json.geo.longitude);
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
 
             window.mods.globe.conns.push({
                 ip,
