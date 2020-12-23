@@ -104,20 +104,34 @@ class Netstat {
             if (net.ip4 === "127.0.0.1") {
                 offline = true;
             } else {
+<<<<<<< HEAD
                 if (this.runsBeforeGeoIPUpdate === 0 && this.lastconn.finished) {
                     this.lastconn = require("https").get({host: "myexternalip.com", port: 443, path: "/json", localAddress: net.ip4, agent: this._httpsAgent}, res => {
+=======
+                if (this.lastconn.finished) {
+                    this.lastconn = require("https").get({host: "ipinfo.now.sh", port: 443, path: "/", localAddress: net.ip4, agent: this._httpsAgent}, res => {
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
                         let rawData = "";
                         res.on("data", chunk => {
                             rawData += chunk;
                         });
                         res.on("end", () => {
                             try {
+<<<<<<< HEAD
                                 let data = JSON.parse(rawData);
                                 this.ipinfo = {
                                     ip: data.ip,
                                     geo: this.geoLookup.get(data.ip).location
                                 };
 
+=======
+                                this.ipinfo = JSON.parse(rawData);
+
+                                if (!this.ipinfo.api_version.startsWith("3")) console.warn("Warning: ipinfo API version might not be compatible");
+
+                                delete this.ipinfo.api_version;
+                                delete this.ipinfo.time;
+>>>>>>> parent of 590c675... :bookmark: Release v2.2.2
                                 let ip = this.ipinfo.ip;
                                 document.querySelector("#mod_netstat_innercontainer > div:nth-child(2) > h2").innerHTML = window._escapeHtml(ip);
 
